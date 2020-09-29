@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>About Us</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Style the body */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+/* Header/logo Title */
+.header {
+  padding: 10px;
+  text-align: center;
+  background-image: url("to_do_list_pic.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: fill;
+  box-shadow:inset 0 0 0 2000px rgba(255, 0, 150, 0.3);
+  color: black;
+}
+
+/* Increase the font size of the heading */
+.header h1 {
+  font-size: 40px;
+}
+
+/* Style the top navigation bar */
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+}
+
+/* Style the navigation bar links */
+.navbar a {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+}
+
+/* Right-aligned link */
+.navbar a.right {
+  float: right;
+}
+
+/* Change color on hover */
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Column container */
+.row {  
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  -ms-flex-wrap: wrap; /* IE10 */
+  flex-wrap: wrap;
+}
+
+/* Create two unequal columns that sits next to each other */
+/* Sidebar/left column */
+.side {
+  -ms-flex: 30%; /* IE10 */
+  flex: 30%;
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+
+/* Main column */
+.main1 {   
+  -ms-flex: 70%; /* IE10 */
+  flex: 70%;
+  background-color: white;
+  padding-left: 150px;
+  padding-right: 150px;
+}
+    
+.main2 {   
+  -ms-flex: 70%; /* IE10 */
+  flex: 70%;
+  background-color: white;
+  padding-left: 150px;
+  padding-right: 150px;
+  padding-top: 100px;
+}
+    
+.main3 {   
+  -ms-flex: 70%; /* IE10 */
+  flex: 70%;
+  background-color: white;
+  padding-left: 150px;
+  padding-right: 150px;
+  padding-top: 105px;
+  padding-bottom: 150px;
+}
+
+/* Fake image, just for this example */
+/*
+.fakeimg {
+  background-color: #aaa;
+  width: 100%;
+  padding: 20px;
+}
+*/
+    
+.headshots {
+  width: 16%;
+  float: left;
+  padding-right: 20px;
+}
+
+/* Footer */
+/*
+.footer {
+  padding: 20px;
+  text-align: center;
+  background: #ddd;
+}
+*/
+
+/* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 700px) {
+  .row {   
+    flex-direction: column;
+  }
+}
+
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 400px) {
+  .navbar a {
+    float: none;
+    width: 100%;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>About Us</h1>
+    <!--<h2>Developed by: T3AM</h2>
+  <p>T3AM's To-Do application allows for the creation of multiple to-do lists. Tasks can be added, removed, categorized, and grouped by date. More cool features to come!</p>-->
+</div>
+
+<div class="navbar">
+  <a href="swe-web.html">Home</a>
+  <a href="about.html">About Us</a>
+  <!--<a href="#">Link</a>
+  <a href="#">Link</a>
+  <a href="#" class="right">Link</a>-->
+</div>
+
+<div class="row">
+  <!--<div class="side">
+    <h2>About Me</h2>
+    <h5>Photo of me:</h5>
+    <div class="fakeimg" style="height:200px;">Image</div>
+    <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
+    <h3>More Text</h3>
+    <p>Lorem ipsum dolor sit ame.</p>
+    <div class="fakeimg" style="height:60px;">Image</div><br>
+    <div class="fakeimg" style="height:60px;">Image</div><br>
+    <div class="fakeimg" style="height:60px;">Image</div>
+  </div>-->
+    </div>
+  <div class="main1">
+    <h2>Meet the T3AM</h2>
+    <br>
+    <!--<h5>Title description, Dec 7, 2017</h5>-->
+    <img class="headshots" src="serena.jpg" alt="Serena Vincent Headshot" >
+    <h3>Serena Vincent</h3>
+    <p>Serena Vincent is a computer science major at Spelman College from the Bay Area, California. She has had internships at Carnegie Mellon University and Google with experience in networks and OAuth. In working on T3AM's To-Do, she has taken upon the roles of developer and business analyst while collaborating with fellow team members.</p>
+  </div>
+    
+    <div class="main2">
+    <img class="headshots" src="kalia.jpg" alt="Kalia Carter Headshot">
+    <h3>Kalia Carter</h3>
+    <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+  </div>
+    
+    <div class="main3">
+    <img class="headshots" src="aylesha.jpg" alt="Aylesha Patterson Headshot">
+    <h3>Aylesha Patterson</h3>
+    <p>Aylesha Patterson is a senior, computer science major at Spelman College in Atlanta, Georgia. However, she is originally from Baton Rouge, Louisiana. She has held the titles of Software Development Intern, Project Management and Communications Intern, Co-captain of the Spelman Programming Team, and Video Gaming Researcher. In working on T3AM's To-Do, she has taken upon the roles of developer and UX/UI designer while collaborating with fellow team members.</p>
+    <br>
+  </div>
+
+
+<!--
+<div class="footer">
+  <h2>Footer</h2>
+</div>
+-->
+
+</body>
+</html>

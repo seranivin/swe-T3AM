@@ -5,27 +5,45 @@
     <title>T3AM To-Do!</title>    
     <link rel="stylesheet" type="text/css" href="css/style.css">    
 </head>    
-<body>    
+<body> 
+<!Home, work, and other columns with text area>  
     <h2>T3AM To-Do!</h2><br>    
-    <div class="home">    
-    <form id="home" method="get" action="home.php">    
+    <div class="row">    
+    <div class="home" method="get" action="home.php">    
         <label><b>Home     
         </b>
         </label>
-        <textarea id="w3review" name="w3review" rows="20" cols="45">
-            
+        <textarea id="w3review" name="w3review" rows="20" cols="35">          
   </textarea>  
-</form>              
-<br><br> 
-<input type="button"  name="edit" id="edit" value="Add" onclick="home_to_edit()"> <input type="button"  name="edit" id="edit" value="Edit" onclick="home_to_edit()"> 
-
+</div>
+<div class="home" method="get" action="work.php">    
+        <label><b>Work     
+        </b>
+        </label>
+        <textarea id="w3review" name="w3review" rows="20" cols="35">     
+  </textarea>    
+</div>
+<div class="home" method="get" action="work.php">    
+        <label><b>Other     
+        </b>
+        </label>
+        <textarea id="w3review" name="w3review" rows="20" cols="35">     
+  </textarea>    
+</div>
+</div>    
+</body>
+    
+<!"ADD" and "EDIT" buttons> 
+    <div style="text-align:center">
+    <br><br> 
+    <input type="button" class="addButton" name="edit" id="edit" value="Add" onclick="home_to_edit()"> 
+    <input type="button" class="editButton" name="edit" id="edit" value="Edit" onclick="home_to_edit()"> 
+</div>
 <script>
     function home_to_edit() {
       location.href = "edit-page.html";
     }
 </script>
-</div>    
-</body>    
 </html> 
 <style>
 body  
@@ -34,17 +52,29 @@ body
     padding: 0;  
     background-color:#6abadeba;  
     font-family: 'Arial';  
-}  
+}
+.addButton {
+  background-color: #4CAF50;
+}
+.editButton {
+  background-color: #ff8080;
+}
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
 .home{  
-        width: 382px;  
+        width: 20%;
+        float: left;
         overflow: hidden;  
-        margin: auto;  
-        margin: 20 0 0 450px;  
-        padding: 80px;  
+        margin-left: 50px;
+        margin-top: 0px; 
+        padding: 60px;  
         background: #23463f;  
         border-radius: 15px ;  
           
-}  
+}
 h2{  
     text-align: center;  
     color: #277582;  

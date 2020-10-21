@@ -1,30 +1,78 @@
 <!DOCTYPE html>    
 <html>    
 <head>    
-    <title>Create Your T3AM To-Do!</title>    
+    <title>T3AM To-Do!</title>    
     <link rel="stylesheet" type="text/css" href="css/style.css">    
 </head>    
-<body>    
-    <h2>Create Your T3AM To-Do!</h2><br>    
-    <div class="home">    
-    <form id="home" method="get" action="home.php">    
-        <label><b>Edit     
+<body> 
+<!Calendar, Description, and Options>  
+    <h2>T3AM To-Do!</h2><br>    
+    <div class="row">    
+    <div class="home" method="get" action="home.php">    
+        <label><b>Home     
         </b>
         </label>
-        <textarea id="w3review" name="w3review" rows="20" cols="45">
-            
+        <textarea id="w3review" name="w3review" rows="20" cols="35">          
   </textarea>  
-</form>              
-<br><br> 
-<input type="button"  name="edit" id="edit" value="Done" onclick="edit_to_home()"> 
-
+</div>
+<div class="home" method="get" action="work.php">    
+        <label><b>Description     
+        </b>
+        </label>
+        <textarea id="w3review" name="w3review" rows="10" cols="35">     
+  </textarea>
+    <br><br>
+    <label><b>Time  </b></label> <br><br>
+  <input type="text" id="fname" name="fname" style="width: 30px;"><label> :</label>
+    <input type="text" id="fname" name="fname" style="width: 40px;">
+      <select name="timeDay" id="timeDay">
+        <option value="am">AM</option>
+        <option value="pm">PM</option>
+      </select>
+    <br><br>
+</div>
+<div class="home" method="get" action="work.php">    
+        <label><b>Options     
+        </b>
+        </label>
+        <br><br> 
+  <label for="options">To-Do Type:</label>
+      <select name="options" id="options">
+        <option value="home">Home</option>
+        <option value="work">Work</option>
+        <option value="other">Other</option>
+      </select>
+    <br><br>
+    <label for="options">Priority:</label>
+      <select name="options" id="options">
+        <option value="highP">High Priority</option>
+        <option value="mediumP">Medium Priority</option>
+        <option value="lowP">Low Priority</option>
+        <option value="noP">No Priority</option>
+      </select>
+    <br><br>
+    <label for="options">Time Zone:</label>
+      <select name="options" id="options">
+        <option value="est">Eastern Standard Time</option>
+        <option value="pst">Pacific Standard Time</option>
+        <option value="cst">Central Standard Time</option>
+      </select>
+    <br><br>
+</div>
+</div>    
+</body>
+    
+<!"DONE" button> 
+    <div style="text-align:center">
+    <br><br> 
+    <input type="button" class="doneButton" name="edit" id="edit" value="Done" onclick="edit_to_home()">  
+</div>
 <script>
     function edit_to_home() {
       location.href = "home-page.html";
     }
 </script>
-</div>    
-</body>    
+
 </html> 
 <style>
 body  
@@ -33,17 +81,27 @@ body
     padding: 0;  
     background-color:#6abadeba;  
     font-family: 'Arial';  
-}  
+}
+.doneButton {
+  background-color: #00ff00;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
 .home{  
-        width: 382px;  
+        width: 20%;
+        float: left;
         overflow: hidden;  
-        margin: auto;  
-        margin: 20 0 0 450px;  
-        padding: 80px;  
-        background: #23463f;  
+        margin-left: 50px;
+        margin-top: 0px; 
+        padding: 60px;  
+        background: #0066cc;  
         border-radius: 15px ;  
           
-}  
+}
 h2{  
     text-align: center;  
     color: #277582;  
@@ -96,4 +154,5 @@ a{
     float: right;  
     background-color: grey;  
 }
+
 </style>

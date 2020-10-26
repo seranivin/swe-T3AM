@@ -9,9 +9,9 @@ loginButton.addEventListener("click", (e) => {
     console.log(username);
     console.log(password);
 
-    var username_list = ["user","test"];
-    var password_list = ["web_dev","test"];
-    if (username_list.includes(username) && password_list.includes(password)) {
+    var user_data = {"test":"test", "user":"password"};
+
+    if (username in user_data && user_data[username] == password) {
         alert("You have successfully logged in.");
         window.location.replace("home-page.html");
     } else {

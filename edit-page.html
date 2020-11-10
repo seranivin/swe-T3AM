@@ -3,13 +3,28 @@
 <head>    
     <title>T3AM To-Do!</title>    
     <link rel="stylesheet" type="text/css" href="css/style.css">    
-</head>    
+</head> 
+<div class="header">
+  <h1>Task Editor</h1>
+    <!--<h2>Developed by: T3AM</h2>
+  <p>T3AM's To-Do application allows for the creation of multiple to-do lists. Tasks can be added, removed, categorized, and grouped by date. More cool features to come!</p>-->
+</div>
+
+<div class="navbar">
+  <a href="swe-web.html">Home</a>
+  <a href="about.html">About Us</a>
+  <!--<a href="#" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</a>-->
+  <!--<a href="#">Link</a>
+  <a href="#">Link</a>
+  <a href="#" class="right">Link</a>-->
+</div>
+    <br>
 <body> 
 <!Calendar, Description, and Options>  
-    <h2>T3AM To-Do!</h2><br>    
+    <!--<h2>T3AM To-Do!</h2><br>-->    
     <div class="row">    
     <div class="home" method="get" action="home.php">    
-        <label><b>Home     
+        <label><b>Task Title     
         </b>
         </label>
         <textarea id="w3review" name="w3review" rows="20" cols="35">          
@@ -23,9 +38,9 @@
   </textarea>
     <br><br>
     <label><b>Time  </b></label> <br><br>
-  <input type="text" id="fname" name="fname" style="width: 30px;"><label> :</label>
-    <input type="text" id="fname" name="fname" style="width: 40px;">
-      <select name="timeDay" id="timeDay">
+  <input type="text" id="fname" name="fname" style="width: 40px; height: 15px"><label> :</label>
+    <input type="text" id="fname" name="fname" style="width: 40px; height: 15px">
+      <select name="timeDay" id="timeDay" style="margin-bottom: 4px; margin-left: 5px;">
         <option value="am">AM</option>
         <option value="pm">PM</option>
       </select>
@@ -75,15 +90,59 @@
 
 </html> 
 <style>
+/* Header/logo Title */
+.header {
+  padding: 10px;
+  text-align: center;
+  background-image: url("to_do_list_pic.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: fill;
+  box-shadow:inset 0 0 0 2000px #afd275;
+  color: black;
+}
+
+/* Increase the font size of the heading */
+.header h1 {
+  font-size: 40px;
+}
+
+/* Style the top navigation bar */
+.navbar {
+  overflow: hidden;
+  background-color: #7e685a;
+  font-size: 20px;
+}
+
+/* Style the navigation bar links */
+.navbar a {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+}
+
+/* Right-aligned link */
+.navbar a.right {
+  float: right;
+}
+
+/* Change color on hover */
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
 body  
 {  
     margin: 0;  
     padding: 0;  
-    background-color:#6abadeba;  
+    background-color:#f5f5f5;  
     font-family: 'Arial';  
 }
 .doneButton {
-  background-color: #00ff00;
+  background-color: #e7717d;
 }
 
 .row:after {
@@ -97,8 +156,8 @@ body
         overflow: hidden;  
         margin-left: 50px;
         margin-top: 0px; 
-        padding: 60px;  
-        background: #0066cc;  
+        padding: 40px;  
+        background: #c2b9b0;  
         border-radius: 15px ;  
           
 }
@@ -108,9 +167,9 @@ h2{
     padding: 20px;  
 }  
 label{  
-    color: #08ffd1;  
+    color: #7e685a;
     font-size: 17px;  
-}  
+}   
 #Uname{  
     width: 300px;  
     height: 30px;  
@@ -143,16 +202,17 @@ label{
     border-radius: 17px;  
     padding-left: 7px;  
     color: blue;  
-  
-  
-} 
+}
+select {
+   font-size: 17px;
+}
 span{  
     color: white;  
     font-size: 17px;  
 }  
 a{  
     float: right;  
-    background-color: grey;  
+    background-color: #7e685a;  
 }
 
 </style>

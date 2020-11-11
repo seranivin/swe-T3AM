@@ -18,14 +18,14 @@ loginButton.addEventListener("click", (e) => {
         alert("Incorrect password")
         loginErrorMsg.style.opacity = 1;
     }
-    
+    /*
     //Passing login information to firebase
     firebase.database().ref('login/'+username).set({
         usern: username;
         pass: password;
         
     });
-    /*
+    
     var storageRef = firebase.storage().ref();
     var loginRef = firebase.storageRef.child('login_info.txt');
     var loginTxtRef = firebase.storageRef.child('login_info/login_info.txt');

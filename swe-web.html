@@ -355,6 +355,24 @@ span.psw {
     storageBucket: "swe-t3amdb.appspot.com"
   };
   firebase.initializeApp(config);
+    
+// Get a reference to the database service
+var database = firebase.database();
+    
+const loginForm = document.getElementById("login-form");
+const loginButton = document.getElementById("login-form-submit");
+const loginErrorMsg = document.getElementById("login-error-msg");
+document.getElementById("login-form-submit").onclick = function(){
+        //alert("Database.");
+        const username = loginForm.username.value;
+        const password = loginForm.password.value;
+
+        //Passing login information to firebase
+        firebase.database().ref("login/"+username).set({
+            username: username,
+            password: password
+        });
+    }
 
 </script>
 </body>

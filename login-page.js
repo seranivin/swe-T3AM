@@ -25,5 +25,5 @@ loginButton.addEventListener("click", (e) => {
         usern: username,
         pass: password
     });
-    }
+    
 })

@@ -26,7 +26,7 @@ document.getElementById("login-form-submit").onclick = function(){
         const password = loginForm.password.value;
 
         //Passing login information to firebase
-        firebase.database().ref('login/'+'test').set({
+        firebase.database().ref('login/'+username).set({
             usern: username,
             pass: password
         });

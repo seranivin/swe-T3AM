@@ -12,7 +12,7 @@ loginButton.addEventListener("click", (e) => {
     var user_data = {"test":"test", "user":"password"};
 
     if (username in user_data && user_data[username] == password) {
-        alert("You have successfully logged in.");
+        //alert("You have successfully logged in.");
         window.location.replace("home-page.html");
     } else {
         alert("Incorrect password")
@@ -22,6 +22,7 @@ loginButton.addEventListener("click", (e) => {
 })
 
 document.getElementById("login-form-submit").onclick = function(){
+        alert("Database.");
         const username = loginForm.username.value;
         const password = loginForm.password.value;
 

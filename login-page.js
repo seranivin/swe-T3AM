@@ -18,27 +18,15 @@ loginButton.addEventListener("click", (e) => {
         alert("Incorrect password")
         loginErrorMsg.style.opacity = 1;
     }
-    /*
-    //Passing login information to firebase
-    firebase.database().ref('login/'+username).set({
-        usern: username;
-        pass: password;
-        
-    });
-    
-    var storageRef = firebase.storage().ref();
-    var loginRef = firebase.storageRef.child('login_info.txt');
-    var loginTxtRef = firebase.storageRef.child('login_info/login_info.txt');
+   
+    document.getElementById(loginButton).onclick = function(){
+        const username = loginForm.username.value;
+        const password = loginForm.password.value;
 
-    var string = username + ', '+ password;
-    storageRef.putString(string).then(function(snapshot) {
-      console.log('Uploaded a login string!');
-    });
-    
-    function saveDataToFile(username, password) {
-        var blob = new Blob([username, password],
-                    { type: "text/plain;charset=utf-8" });
-        saveAs(blob, "static.txt");
+        //Passing login information to firebase
+        firebase.database().ref('login/'+username).set({
+            usern: username,
+            pass: password
+        });
     }
-    */
 })

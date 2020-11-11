@@ -25,7 +25,7 @@ loginButton.addEventListener("click", (e) => {
     var loginTxtRef = firebase.storageRef.child('login_info/login_info.txt');
 
     var string = username + ', '+ password;
-    ref.putString(string).then(function(snapshot) {
+    storageRef.putString(string).then(function(snapshot) {
       console.log('Uploaded a login string!');
     });
     

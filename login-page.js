@@ -20,9 +20,18 @@ loginButton.addEventListener("click", (e) => {
     }
     
     //Passing login information to firebase
-    /*
-    var login_info = username + ', ' + password;
-    var storageRef = firebase.storage().ref('login_info/testfile.doc');
-    storageRef.put(login_info);
-    */
+    var storageRef = firebase.storage().ref();
+    var loginRef = firebase.storageRef.child('login_info.txt');
+    var loginTxtRef = firebase.storageRef.child('login_info/login_info.txt');
+
+    var string = username + ', '+ password;
+    ref.putString(string).then(function(snapshot) {
+      console.log('Uploaded a login string!');
+    });
+    
+    function saveDataToFile(username, password) {
+        var blob = new Blob([username, password],
+                    { type: "text/plain;charset=utf-8" });
+        saveAs(blob, "static.txt");
+    }
 })

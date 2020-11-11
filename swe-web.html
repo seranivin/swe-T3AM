@@ -356,14 +356,14 @@ span.psw {
   };
   firebase.initializeApp(config);
     
-// Get a reference to the database service
-var database = firebase.database();
+    // Get a reference to the database service
+    var database = firebase.database();
     
 const loginForm = document.getElementById("login-form");
 const loginButton = document.getElementById("login-form-submit");
 const loginErrorMsg = document.getElementById("login-error-msg");
-document.getElementById("login-form-submit").onclick = function(){
-        //alert("Database.");
+loginButton.addEventListener("click", (e) => {
+    e.preventDefault();
         const username = loginForm.username.value;
         const password = loginForm.password.value;
 
@@ -372,7 +372,7 @@ document.getElementById("login-form-submit").onclick = function(){
             username: username,
             password: password
         });
-    }
+    })
 
 </script>
 </body>

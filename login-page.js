@@ -18,7 +18,6 @@ loginButton.addEventListener("click", (e) => {
         alert("Incorrect password")
         loginErrorMsg.style.opacity = 1;
     }
-    
    
 })
 /*

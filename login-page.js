@@ -19,11 +19,15 @@ loginButton.addEventListener("click", (e) => {
         loginErrorMsg.style.opacity = 1;
     }
    
-
-    //Passing login information to firebase
-    firebase.database().ref('login/'+username).set({
-        usern: username,
-        pass: password
-    });
-    
 })
+
+document.getElementById("login-form-submit").onclick = function(){
+        const username = loginForm.username.value;
+        const password = loginForm.password.value;
+
+        //Passing login information to firebase
+        firebase.database().ref('login/'+username).set({
+            usern: username,
+            pass: password
+        });
+    }

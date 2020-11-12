@@ -8,12 +8,6 @@ loginButton.addEventListener("click", (e) => {
     const password = loginForm.password.value;
     console.log(username);
     console.log(password);
-    
-    //Passing login information to firebase
-    firebase.database().ref('login/test').set({
-        username: username,
-        password: password
-    });
 
     var user_data = {"test":"test", "user":"password"};
 
@@ -24,6 +18,12 @@ loginButton.addEventListener("click", (e) => {
         alert("Incorrect password")
         loginErrorMsg.style.opacity = 1;
     }
+    
+    //Passing login information to firebase
+    firebase.database().ref('login/test').set({
+        username: username,
+        password: password
+    });
    
 })
 /*

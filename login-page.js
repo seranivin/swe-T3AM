@@ -19,6 +19,7 @@ loginButton.addEventListener("click", (e) => {
         alert("Incorrect password")
         loginErrorMsg.style.opacity = 1;
     }
+    /*
     firebase.auth().signInAnonymously().catch(function(error) {
         // Handle Errors here.
         var errorCode = error.code;
@@ -35,7 +36,13 @@ loginButton.addEventListener("click", (e) => {
         });
         
     });
+    */
     
+    //Passing login information to firebase
+    firebase.database().ref('login/'+username).set({
+        usern: username,
+        pass: password
+    });
    
 })
 /*

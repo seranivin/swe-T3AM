@@ -328,35 +328,24 @@ span.psw {
 
 <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
-<script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-analytics.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-database.js"></script>
+
 <script>
   // Your web app's Firebase configuration
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   var firebaseConfig = {
-    apiKey: "AIzaSyCwqxglSv5PWmahKhc6YbQbQjYY8s-sRdg",
-    authDomain: "swe-t3amdb.firebaseapp.com",
-    databaseURL: "https://swe-t3amdb.firebaseio.com",
-    projectId: "swe-t3amdb",
-    storageBucket: "swe-t3amdb.appspot.com",
-    messagingSenderId: "738017900456",
-    appId: "1:738017900456:web:e2daf00e2cb777fc078f9d",
-    measurementId: "G-NEQWLSML2F"
+    apiKey: "AIzaSyBIqg8JbEYO5qGVDut_Vi9e_Py5Sd8JsV8",
+    authDomain: "t3amproject.firebaseapp.com",
+    databaseURL: "https://t3amproject.firebaseio.com",
+    projectId: "t3amproject",
+    storageBucket: "t3amproject.appspot.com",
+    messagingSenderId: "122595622902",
+    appId: "1:122595622902:web:e4ec220f32f3d0698511d7",
+    measurementId: "G-MYDLRVE3Z1"
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
-  firebase.analytics();
-    
-    const firebase = require("firebase");
-    // Required for side-effects
-    require("firebase/firestore");
-    
-    // Initialize Cloud Firestore through Firebase
-    firebase.initializeApp({
-      apiKey: 'AIzaSyCwqxglSv5PWmahKhc6YbQbQjYY8s-sRdg',
-      authDomain: 'swe-t3amdb.firebaseapp.com',
-      projectId: 'swe-t3amdb'
-    });
+
 
     //var db = firebase.firestore();
 

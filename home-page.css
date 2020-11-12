@@ -93,6 +93,14 @@ body {
     float: left;
     width: 318px;
   }
+  input#new-task1 {
+    float: left;
+    width: 318px;
+  }
+  input#new-task2 {
+    float: left;
+    width: 318px;
+  }
   p > button:hover {
     color: #0FC57C;
   }
@@ -128,6 +136,11 @@ body {
   }
 
   #completed-task label {
+    text-decoration: line-through;
+    color: white;
+  }
+
+  #completed-task1 label {
     text-decoration: line-through;
     color: white;
   }

@@ -1,7 +1,7 @@
 const loginForm = document.getElementById("login-form");
 const loginButton = document.getElementById("login-form-submit");
 const loginErrorMsg = document.getElementById("login-error-msg");
-const db = firebase.firestore();
+var db = firebase.firestore();
 
 loginButton.addEventListener("click", (e) => {
     e.preventDefault();
@@ -20,18 +20,16 @@ loginButton.addEventListener("click", (e) => {
         loginErrorMsg.style.opacity = 1;
     }
     
-    db.collection("login").add({
-    username: username,
-    password: password,
-    })
-    /*
-    .then(function(docRef) {
-        console.log("Document written with ID: ", docRef.id);
+    const docRef = firestore.doc("login/test_data");
+    docRef.set({
+        username: username,
+        password: password
+    }).then(function() {
+        console.log("Saved login info.");
     })
     .catch(function(error) {
-        console.error("Error adding document: ", error);
+        console.error("Error adding login info: ", error);
     });
-    */
     
    
 })

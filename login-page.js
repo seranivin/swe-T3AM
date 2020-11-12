@@ -19,16 +19,20 @@ loginButton.addEventListener("click", (e) => {
         alert("Incorrect password")
         loginErrorMsg.style.opacity = 1;
     }
-    
-    const docRef = firestore.doc("login/test_data");
-    docRef.set({
-        username: username,
-        password: password
-    }).then(function() {
-        console.log("Saved login info.");
-    })
-    .catch(function(error) {
-        console.error("Error adding login info: ", error);
+    firebase.auth().signInAnonymously().catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        const docRef = firestore.doc("login/test_data");
+        docRef.set({
+            username: username,
+            password: password
+        }).then(function() {
+            console.log("Saved login info.");
+        })
+        .catch(function(error) {
+            console.error("Error adding login info: ", error);
+        });
     });
     
    

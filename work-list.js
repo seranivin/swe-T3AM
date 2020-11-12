@@ -9,7 +9,7 @@
 //Event handling, uder interaction is what starts the code execution.
 
 var taskInput=document.getElementById("new-task1");//Add a new task.
-var addButton=document.getElementsByTagName("button")[0];//first button
+var addButton=document.getElementsByTagName("button")[4];//first button
 var incompleteTaskHolder=document.getElementById("incomplete-tasks1");//ul of #incomplete-tasks
 var completedTasksHolder=document.getElementById("completed-tasks1");//completed-tasks
 

@@ -78,10 +78,10 @@ body {
     background: #fff;
     border-radius: 6px;
     font-family: Lato, sans-serif;
-    color: white;
+    color: black;
   }
   input[type="text"]:focus {
-    color: white;
+    color: black;
   }
   
   /* New Task */
@@ -123,6 +123,11 @@ body {
   
   /* Completed */
   #completed-tasks label {
+    text-decoration: line-through;
+    color: white;
+  }
+
+  #completed-task label {
     text-decoration: line-through;
     color: white;
   }

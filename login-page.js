@@ -10,7 +10,7 @@ loginButton.addEventListener("click", (e) => {
     console.log(password);
     
     //Passing login information to firebase
-    firebase.database().ref("login/test").set({
+    firebase.database().ref('login/test').set({
         username: username,
         password: password
     });

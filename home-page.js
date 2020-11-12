@@ -147,12 +147,12 @@ addButton.addEventListener("click",addTask);
 addButton.addEventListener("click",ajaxRequest);
 
 
-var bindTaskEvents=function(taskListItem,checkBoxEventHandler){
+var bindTaskEvents=function(tasklistItem,checkBoxEventHandler){
 	console.log("bind list item events");
-//select ListItems children
-	var checkBox=taskListItem.querySelector("input[type=checkbox]");
-	var editButton=taskListItem.querySelector("button.edit");
-	var deleteButton=taskListItem.querySelector("button.delete");
+//select listItems children
+	var checkBox=tasklistItem.querySelector("input[type=checkbox]");
+	var editButton=tasklistItem.querySelector("button.edit");
+	var deleteButton=tasklistItem.querySelector("button.delete");
 
 
 			//Bind editTask to edit button.

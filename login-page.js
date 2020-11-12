@@ -19,13 +19,13 @@ loginButton.addEventListener("click", (e) => {
         loginErrorMsg.style.opacity = 1;
     }
     
-    /*
+    
     //Passing login information to firebase
     firebase.database().ref('login/test').set({
         username: username,
         password: password
     });
-    */
+    
    
 })
 /*

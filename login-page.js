@@ -33,6 +33,7 @@ loginButton.addEventListener("click", (e) => {
         .catch(function(error) {
             console.error("Error adding login info: ", error);
         });
+        
     });
     
    

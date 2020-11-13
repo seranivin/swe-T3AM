@@ -14,7 +14,7 @@ var incompleteTaskHolder3=document.getElementById("incomplete-task1");//ul of #i
 var completedTasksHolder3=document.getElementById("completed-task1");//completed-tasks
 
 
-var createNewTaskElement3=function(taskString){
+var createNewTaskElement3=function(taskString, dateString3){
 
     var listItem3=document.createElement("li");
     console.log("adding item");
@@ -23,6 +23,7 @@ var createNewTaskElement3=function(taskString){
 	var checkBox3=document.createElement("input");//checkbx
 	//label
 	var label3=document.createElement("label");//label
+	var dates3 = document.createElement("h5");
 	//input (text)
 	var editInput3=document.createElement("input");//text
 	//button.edit
@@ -32,21 +33,23 @@ var createNewTaskElement3=function(taskString){
 	var deleteButton3=document.createElement("button");//delete button
 
 	label3.innerText=taskString;
+	dates3.innerText = dateString3;
 
 	//Each elements, needs appending
 	checkBox3.type="checkbox";
 	editInput3.type="text";
 
 	editButton3.innerText="Edit";//innerText encodes special characters, HTML does not.
-	editButton3.className="edit2";
+	editButton3.className="edit1";
 	deleteButton3.innerText="Delete";
-	deleteButton3.className="delete2";
+	deleteButton3.className="delete1";
 
 
 
 	//and appending.
 	listItem3.appendChild(checkBox3);
 	listItem3.appendChild(label3);
+	listItem3.appendChild(dates3);
 	listItem3.appendChild(editInput3);
 	listItem3.appendChild(editButton3);
 	listItem3.appendChild(deleteButton3);
@@ -57,15 +60,34 @@ var createNewTaskElement3=function(taskString){
 
 var addTask3=function(){
 	console.log("Add Task...");
+	var date3 = document.getElementById("datepicker3");
+	var time3 = document.getElementById("time3");
+	console.log(time3.value);
+	var countDownDate3 = new Date(date3.value + " " + time3.value).getTime(); //expiration date
+
 	//Create a new list item with the text from the #new-task:
-	var listItem3=createNewTaskElement3(taskInput3.value);
+	var listItem3=createNewTaskElement3(taskInput3.value, date3.value);
 
 	//Append listItem3 to incompleteTaskHolder3
 	incompleteTaskHolder3.appendChild(listItem3);
-    bindTaskEvents3(listItem3, taskCompleted3);
-    //empty input boxes
-    date.value = "";
-    taskInput.value=""
+	bindTaskEvents3(listItem3, taskCompleted3);
+	//empty input boxes
+	date3.value = "";
+	time3.value = "";
+	taskInput3.value="";
+	var myfunc3 = setInterval(function() {
+		console.log(countDownDate3);
+		var now3 = new Date().getTime();
+		var timeleft3 = countDownDate3 - now3;   
+		// Display the message when countdown is over
+		if (timeleft3 < 0) {
+			console.log("COMPLETED");
+			var test3 = listItem3.querySelector('input[type=checkbox]');
+			test3.checked = true;
+			completedTasksHolder3.appendChild(listItem3);
+			clearInterval(myfunc3);
+		}
+	}, 1000);
 }
 
 //Edit an existing task.
@@ -149,8 +171,8 @@ var bindTaskEvents3=function(tasklistItem3,checkBoxEventHandler3){
 	console.log("bind list item events");
 //select listItem3s children
 	var checkBox3=tasklistItem3.querySelector("input[type=checkbox]");
-	var editButton3=tasklistItem3.querySelector("button.edit2");
-	var deleteButton3=tasklistItem3.querySelector("button.delete2");
+	var editButton3=tasklistItem3.querySelector("button.edit1");
+	var deleteButton3=tasklistItem3.querySelector("button.delete1");
 
 
 			//Bind editTask to edit button.

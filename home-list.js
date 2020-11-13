@@ -15,7 +15,7 @@ var completedTasksHolder=document.getElementById("completed-tasks");//completed-
 
 
 //New task list item
-var createNewTaskElement=function(taskString, dateString){
+var createNewTaskElement=function(taskString, dateString, timeString){
 
     var listItem=document.createElement("li");
     console.log("adding item");
@@ -24,7 +24,8 @@ var createNewTaskElement=function(taskString, dateString){
 	var checkBox=document.createElement("input");//checkbx
 	//label
 	var label=document.createElement("label");//label
-	var dates = document.createElement("h5");
+	var dates = document.createElement("h5");// date label
+	var times = document.createElement("h6");
 	//input (text)
 	var editInput=document.createElement("input");//text
 	//button.edit
@@ -32,12 +33,9 @@ var createNewTaskElement=function(taskString, dateString){
 
 	//button.delete
 	var deleteButton=document.createElement("button");//delete button
-	console.log(dateString);
-	
-	//dateString = dateString.fontsize(2);
-	
+	//label texts
 	label.innerText=taskString;
-	dates.innerText = dateString;
+	dates.innerText = dateString + "\n" + timeString;
 	//Each elements, needs appending
 	checkBox.type="checkbox";
 	editInput.type="text";
@@ -53,6 +51,7 @@ var createNewTaskElement=function(taskString, dateString){
 	listItem.appendChild(checkBox);
 	listItem.appendChild(label);
 	listItem.appendChild(dates);
+	listItem.appendChild(times);
 	listItem.appendChild(editInput);
 	listItem.appendChild(editButton);
 	listItem.appendChild(deleteButton);
@@ -64,17 +63,37 @@ var createNewTaskElement=function(taskString, dateString){
 var addTask=function(){
 	console.log("Add Task...");
 	var date = document.getElementById("datepicker");
+	var time = document.getElementById("time");
+	console.log(time.value);
+	var countDownDate = new Date(date.value + " " + time.value).getTime(); //expiration date
+
 	//Create a new list item with the text from the #new-task:
-	var listItem=createNewTaskElement(taskInput.value, date.value);
+	var listItem=createNewTaskElement(taskInput.value, date.value, time.value);
+	console.log(countDownDate);
+	console.log(listItem);
 
 	//Append listItem to incompleteTaskHolder
 	incompleteTaskHolder.appendChild(listItem);
 	bindTaskEvents(listItem, taskCompleted);
 	//empty input boxes
 	date.value = "";
+	time.value = "";
 	taskInput.value="";
-
+	var myfunc = setInterval(function() {
+		console.log(countDownDate);
+		var now = new Date().getTime();
+		var timeleft = countDownDate - now;   
+		// Display the message when countdown is over
+		if (timeleft < 0) {
+			console.log("COMPLETED");
+			var test = listItem.querySelector('input[type=checkbox]');
+			test.checked = true;
+			completedTasksHolder.appendChild(listItem);
+			clearInterval(myfunc);
+		}
+	}, 1000);
 }
+
 
 //Edit an existing task.
 

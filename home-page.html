@@ -2,6 +2,20 @@
 <html>
 <head>
 <link rel="stylesheet" href="home-page.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>T3AM To-Do</title>
+<link rel="stylesheet" href="calendar.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+    $( "#datepicker2" ).datepicker();
+    $( "#datepicker3" ).datepicker();
+  } );
+  </script>
 </head>
 <body>
     <div class="header">
@@ -23,7 +37,7 @@
                
             <h2>Home</h2>
             <p style="color:white;">
-                <label style="color:white;" for="new-task">Add Item</label><input style="color: black;" id="new-task" type="text"><button>Add</button>
+                <label style="color:white;" for="new-task">Add Item</label><input style="color: black;" id="new-task" type="text"><button>Add</button> Date: <input type="text" id="datepicker">
             </p>
             <ul id="incomplete-tasks" style="color:white;">
               <li ><input type="checkbox"><label>Pay Bills</label><input style="color: black;" type="text"><button class="edit">Edit</button><button class="delete">Delete</button></li>              
@@ -40,7 +54,7 @@
         <div class="container">    
             <h2>Work</h2>
             <p>
-                <label style="color:white;" for="new-task">Add Item</label><input style="color: black;" id="new-task1" type="text"><button>Add</button>
+                <label style="color:white;" for="new-task">Add Item</label><input style="color: black;" id="new-task1" type="text"><button>Add</button> Date: <input type="text" id="datepicker2">
             </p>
             <ul id="incomplete-task">
               <li><input type="checkbox"><label>Finish Project</label><input style="color: black;" type="text"><button class="edit1">Edit</button><button class="delete1">Delete</button></li>              
@@ -57,7 +71,7 @@
         <div class="container">    
             <h2 >School</h2>
             <p style="color:white;">
-                <label style="color:white;" for="new-task">Add Item</label><input style="color: black;" id="new-task2" type="text"><button>Add</button>
+                <label style="color:white;" for="new-task">Add Item</label><input style="color: black;" id="new-task2" type="text"><button>Add</button> Date: <input type="text" id="datepicker3">
             </p>
             <ul style="color:white;" id="incomplete-task1">
               <li><input type="checkbox"><label>Do math homework</label><input style="color: black;" type="text"><button class="edit">Edit</button><button class="delete">Delete</button></li>              

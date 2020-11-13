@@ -91,15 +91,15 @@ body {
   }
   input#new-task {
     float: left;
-    width: 318px;
+    width: 200px;
   }
   input#new-task1 {
     float: left;
-    width: 318px;
+    width: 200px;
   }
   input#new-task2 {
     float: left;
-    width: 318px;
+    width: 200px;
   }
   p > button:hover {
     color: #0FC57C;
@@ -156,6 +156,10 @@ body {
   
   ul li.editMode label {
     display:none;
+  }
+
+  #datepicker, #datepicker2, #datepicker3{
+    width: 85px;
   }
 
   .header {

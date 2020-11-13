@@ -70,7 +70,7 @@ body {
   }
   input[type="text"] {
     margin: 0;
-    font-size: 18px;
+    font-size: 12px;
     line-height: 18px;
     height: 18px;
     padding: 10px;
@@ -199,4 +199,8 @@ body {
   .navbar a:hover {
     background-color: #ddd;
     color: black;
+  }
+
+  h5{
+    font-weight: 200;
   }

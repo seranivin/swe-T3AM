@@ -15,7 +15,7 @@ var completedTasksHolder=document.getElementById("completed-tasks");//completed-
 
 
 //New task list item
-var createNewTaskElement=function(taskString){
+var createNewTaskElement=function(taskString, dateString){
 
     var listItem=document.createElement("li");
     console.log("adding item");
@@ -24,6 +24,7 @@ var createNewTaskElement=function(taskString){
 	var checkBox=document.createElement("input");//checkbx
 	//label
 	var label=document.createElement("label");//label
+	var dates = document.createElement("h5");
 	//input (text)
 	var editInput=document.createElement("input");//text
 	//button.edit
@@ -31,9 +32,12 @@ var createNewTaskElement=function(taskString){
 
 	//button.delete
 	var deleteButton=document.createElement("button");//delete button
-
+	console.log(dateString);
+	
+	//dateString = dateString.fontsize(2);
+	
 	label.innerText=taskString;
-
+	dates.innerText = dateString;
 	//Each elements, needs appending
 	checkBox.type="checkbox";
 	editInput.type="text";
@@ -48,6 +52,7 @@ var createNewTaskElement=function(taskString){
 	//and appending.
 	listItem.appendChild(checkBox);
 	listItem.appendChild(label);
+	listItem.appendChild(dates);
 	listItem.appendChild(editInput);
 	listItem.appendChild(editButton);
 	listItem.appendChild(deleteButton);
@@ -58,13 +63,15 @@ var createNewTaskElement=function(taskString){
 
 var addTask=function(){
 	console.log("Add Task...");
+	var date = document.getElementById("datepicker");
 	//Create a new list item with the text from the #new-task:
-	var listItem=createNewTaskElement(taskInput.value);
+	var listItem=createNewTaskElement(taskInput.value, date.value);
 
 	//Append listItem to incompleteTaskHolder
 	incompleteTaskHolder.appendChild(listItem);
 	bindTaskEvents(listItem, taskCompleted);
-
+	//empty input boxes
+	date.value = "";
 	taskInput.value="";
 
 }
@@ -83,19 +90,15 @@ var label=listItem.querySelector("label");
 var containsClass=listItem.classList.contains("editMode");
 		//If class of the parent is .editmode
 		if(containsClass){
-
 		//switch to .editmode
 		//label becomes the inputs value.
 			label.innerText=editInput.value;
 		}else{
 			editInput.value=label.innerText;
 		}
-
 		//toggle .editmode on the parent.
 		listItem.classList.toggle("editMode");
 }
-
-
 
 
 //Delete task.

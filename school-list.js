@@ -38,9 +38,9 @@ var createNewTaskElement3=function(taskString){
 	editInput3.type="text";
 
 	editButton3.innerText="Edit";//innerText encodes special characters, HTML does not.
-	editButton3.className="edit1";
+	editButton3.className="edit2";
 	deleteButton3.innerText="Delete";
-	deleteButton3.className="delete1";
+	deleteButton3.className="delete2";
 
 
 
@@ -62,8 +62,10 @@ var addTask3=function(){
 
 	//Append listItem3 to incompleteTaskHolder3
 	incompleteTaskHolder3.appendChild(listItem3);
-	bindTaskEvents3(listItem3, taskCompleted3);
-
+    bindTaskEvents3(listItem3, taskCompleted3);
+    //empty input boxes
+    date.value = "";
+    taskInput.value=""
 }
 
 //Edit an existing task.
@@ -147,8 +149,8 @@ var bindTaskEvents3=function(tasklistItem3,checkBoxEventHandler3){
 	console.log("bind list item events");
 //select listItem3s children
 	var checkBox3=tasklistItem3.querySelector("input[type=checkbox]");
-	var editButton3=tasklistItem3.querySelector("button.edit1");
-	var deleteButton3=tasklistItem3.querySelector("button.delete1");
+	var editButton3=tasklistItem3.querySelector("button.edit2");
+	var deleteButton3=tasklistItem3.querySelector("button.delete2");
 
 
 			//Bind editTask to edit button.

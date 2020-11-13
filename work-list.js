@@ -63,7 +63,9 @@ var addTask2=function(){
 	//Append listItem2 to incompleteTaskHolder2
 	incompleteTaskHolder2.appendChild(listItem2);
 	bindTaskEvents2(listItem2, taskCompleted2);
-
+	//empty input boxes
+	date.value = "";
+	taskInput.value=""
 }
 
 //Edit an existing task.

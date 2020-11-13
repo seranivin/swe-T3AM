@@ -1,22 +1,34 @@
-const loginForm = document.getElementById("login-form");
-const loginButton = document.getElementById("login-form-submit");
-const loginErrorMsg = document.getElementById("login-error-msg");
-var db = firebase.firestore();
+var loginForm = document.getElementById("login-form");
+var loginButton = document.getElementById("login-form-submit");
+var loginErrorMsg = document.getElementById("login-error-msg");
+
+    //var db = firebase.firestore();
+
 
 loginButton.addEventListener("click", (e) => {
+    //Ready();
     e.preventDefault();
-    const username = loginForm.username.value;
-    const password = loginForm.password.value;
+    var username = loginForm.username.value;
+    var password = loginForm.password.value;
     console.log(username);
     console.log(password);
+    
+   
+    
 
-    var user_data = {"test":"test", "user":"password"};
+    var user_data = {"test":"test", "user":"password", "using":"passing"};
 
     if (username in user_data && user_data[username] == password) {
+          //Passing login information to firebase
+        firebase.database().ref('login/'+username).set({
+            username: username,
+            password: password
+        });
         alert("You have successfully logged in.");
-        window.location.replace("home-page.html");
+        
+        //window.location.replace("home-page.html");
     } else {
-        alert("Incorrect password")
+        //alert("Incorrect password")
         loginErrorMsg.style.opacity = 1;
     }
     /*
@@ -36,14 +48,7 @@ loginButton.addEventListener("click", (e) => {
         });
         
     });
-    */
-    /*
-    //Passing login information to firebase
-    firebase.database().ref('login/'+username).set({
-        usern: username,
-        pass: password
-    });
-    */
+    */    
    
 })
 /*

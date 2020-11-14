@@ -4,8 +4,6 @@
 //Problem: User interaction does not provide the correct results.
 //Solution: Add interactivity so the user can manage daily tasks.
 //Break things down into smaller steps and take each step at a time.
-
-
 //Event handling, uder interaction is what starts the code execution.
 
 var taskInput=document.getElementById("new-task");//Add a new task.
@@ -25,7 +23,7 @@ var createNewTaskElement=function(taskString, dateString, timeString){
 	//label
 	var label=document.createElement("label");//label
 	var dates = document.createElement("h5");// date label
-	var times = document.createElement("h6");
+	var times = document.createElement("h6");// time label
 	//input (text)
 	var editInput=document.createElement("input");//text
 	//button.edit
@@ -58,7 +56,8 @@ var createNewTaskElement=function(taskString, dateString, timeString){
 	return listItem;
 }
 
-
+//time remaining
+var completed;
 
 var addTask=function(){
 	console.log("Add Task...");
@@ -86,6 +85,7 @@ var addTask=function(){
 		// Display the message when countdown is over
 		if (timeleft < 0) {
 			console.log("COMPLETED");
+			completed = true;
 			var test = listItem.querySelector('input[type=checkbox]');
 			test.checked = true;
 			completedTasksHolder.appendChild(listItem);
@@ -139,19 +139,25 @@ var taskCompleted=function(){
 	//Append the task list item to the #completed-tasks
 	var listItem=this.parentNode;
 	completedTasksHolder.appendChild(listItem);
-				bindTaskEvents(listItem, taskIncomplete);
+	bindTaskEvents(listItem, taskIncomplete);
 
 }
 
 
 var taskIncomplete=function(){
 		console.log("Incomplete Task...");
-//Mark task as incomplete.
-	//When the checkbox is unchecked
+		//Mark task as incomplete.
+		//When the checkbox is unchecked
 		//Append the task list item to the #incomplete-tasks.
-		var listItem=this.parentNode;
-	incompleteTaskHolder.appendChild(listItem);
+		if (completed == true){
+			alert("The deadline for that event has passed. It cannot be moved to the incomplete list");
+		}
+		else{
+			var listItem=this.parentNode;
+			incompleteTaskHolder.appendChild(listItem);
 			bindTaskEvents(listItem,taskCompleted);
+		}
+		
 }
 
 
@@ -174,7 +180,6 @@ var bindTaskEvents=function(tasklistItem,checkBoxEventHandler){
 	var checkBox=tasklistItem.querySelector("input[type=checkbox]");
 	var editButton=tasklistItem.querySelector("button.edit");
 	var deleteButton=tasklistItem.querySelector("button.delete");
-
 
 			//Bind editTask to edit button.
 			editButton.onclick=editTask;

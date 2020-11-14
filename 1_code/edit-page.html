@@ -1,0 +1,218 @@
+<!DOCTYPE html>    
+<html>    
+<head>    
+    <title>T3AM To-Do!</title>    
+    <link rel="stylesheet" type="text/css" href="css/style.css">    
+</head> 
+<div class="header">
+  <h1>Task Editor</h1>
+    <!--<h2>Developed by: T3AM</h2>
+  <p>T3AM's To-Do application allows for the creation of multiple to-do lists. Tasks can be added, removed, categorized, and grouped by date. More cool features to come!</p>-->
+</div>
+
+<div class="navbar">
+  <a href="swe-web.html">Home</a>
+  <a href="about.html">About Us</a>
+  <!--<a href="#" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</a>-->
+  <!--<a href="#">Link</a>
+  <a href="#">Link</a>
+  <a href="#" class="right">Link</a>-->
+</div>
+    <br>
+<body> 
+<!Calendar, Description, and Options>  
+    <!--<h2>T3AM To-Do!</h2><br>-->    
+    <div class="row">    
+    <div class="home" method="get" action="home.php">    
+        <label><b>Task Title     
+        </b>
+        </label>
+        <textarea id="w3review" name="w3review" rows="20" cols="35">          
+  </textarea>  
+</div>
+<div class="home" method="get" action="work.php">    
+        <label><b>Description     
+        </b>
+        </label>
+        <textarea id="w3review" name="w3review" rows="10" cols="35">     
+  </textarea>
+    <br><br>
+    <label><b>Time  </b></label> <br><br>
+  <input type="text" id="fname" name="fname" style="width: 40px; height: 15px"><label> :</label>
+    <input type="text" id="fname" name="fname" style="width: 40px; height: 15px">
+      <select name="timeDay" id="timeDay" style="margin-bottom: 4px; margin-left: 5px;">
+        <option value="am">AM</option>
+        <option value="pm">PM</option>
+      </select>
+    <br><br>
+</div>
+<div class="home" method="get" action="work.php">    
+        <label><b>Options     
+        </b>
+        </label>
+        <br><br> 
+  <label for="options">To-Do Type:</label>
+      <select name="options" id="options">
+        <option value="home">Home</option>
+        <option value="work">Work</option>
+        <option value="other">Other</option>
+      </select>
+    <br><br>
+    <label for="options">Priority:</label>
+      <select name="options" id="options">
+        <option value="highP">High Priority</option>
+        <option value="mediumP">Medium Priority</option>
+        <option value="lowP">Low Priority</option>
+        <option value="noP">No Priority</option>
+      </select>
+    <br><br>
+    <label for="options">Time Zone:</label>
+      <select name="options" id="options">
+        <option value="est">Eastern Standard Time</option>
+        <option value="pst">Pacific Standard Time</option>
+        <option value="cst">Central Standard Time</option>
+      </select>
+    <br><br>
+</div>
+</div>    
+</body>
+    
+<!"DONE" button> 
+    <div style="text-align:center">
+    <br><br> 
+    <input type="button" class="doneButton" name="edit" id="edit" value="Done" onclick="edit_to_home()">  
+</div>
+<script>
+    function edit_to_home() {
+      location.href = "home-page.html";
+    }
+</script>
+
+</html> 
+<style>
+/* Header/logo Title */
+.header {
+  padding: 10px;
+  text-align: center;
+  background-image: url("to_do_list_pic.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: fill;
+  box-shadow:inset 0 0 0 2000px #afd275;
+  color: black;
+}
+
+/* Increase the font size of the heading */
+.header h1 {
+  font-size: 40px;
+}
+
+/* Style the top navigation bar */
+.navbar {
+  overflow: hidden;
+  background-color: #7e685a;
+  font-size: 20px;
+}
+
+/* Style the navigation bar links */
+.navbar a {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+}
+
+/* Right-aligned link */
+.navbar a.right {
+  float: right;
+}
+
+/* Change color on hover */
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+body  
+{  
+    margin: 0;  
+    padding: 0;  
+    background-color:#f5f5f5;  
+    font-family: 'Arial';  
+}
+.doneButton {
+  background-color: #e7717d;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.home{  
+        width: 20%;
+        float: left;
+        overflow: hidden;  
+        margin-left: 50px;
+        margin-top: 0px; 
+        padding: 40px;  
+        background: #c2b9b0;  
+        border-radius: 15px ;  
+          
+}
+h2{  
+    text-align: center;  
+    color: #277582;  
+    padding: 20px;  
+}  
+label{  
+    color: #7e685a;
+    font-size: 17px;  
+}   
+#Uname{  
+    width: 300px;  
+    height: 30px;  
+    border: none;  
+    border-radius: 3px;  
+    padding-left: 8px;  
+}  
+#Pass{  
+    width: 300px;  
+    height: 30px;  
+    border: none;  
+    border-radius: 3px;  
+    padding-left: 8px;  
+      
+}  
+#log{  
+    width: 300px;  
+    height: 30px;  
+    border: none;  
+    border-radius: 17px;  
+    padding-left: 7px;  
+    color: blue;  
+  
+  
+} 
+#edit{  
+    width: 100px;  
+    height: 30px;  
+    border: none;  
+    border-radius: 17px;  
+    padding-left: 7px;  
+    color: blue;  
+}
+select {
+   font-size: 17px;
+}
+span{  
+    color: white;  
+    font-size: 17px;  
+}  
+a{  
+    float: right;  
+    background-color: #7e685a;  
+}
+
+</style>

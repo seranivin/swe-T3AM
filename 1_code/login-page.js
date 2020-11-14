@@ -2,35 +2,41 @@ var loginForm = document.getElementById("login-form");
 var loginButton = document.getElementById("login-form-submit");
 var loginErrorMsg = document.getElementById("login-error-msg");
 
-    //var db = firebase.firestore();
-
-
 loginButton.addEventListener("click", (e) => {
     //Ready();
     e.preventDefault();
-    var username = loginForm.username.value;
-    var password = loginForm.password.value;
+    window.username = loginForm.username.value;
+    window.password = loginForm.password.value;
     console.log(username);
     console.log(password);
     
-   
-    
-
-    var user_data = {"test":"test", "user":"password", "using":"passing"};
+    var user_data = {"test":"test", "user":"password", "using":"passing","other":"others"};
 
     if (username in user_data && user_data[username] == password) {
           //Passing login information to firebase
-        firebase.database().ref('login/'+username).set({
-            username: username,
-            password: password
-        });
+        saveLoginToDatabase(username, password);
         alert("You have successfully logged in.");
-        
-        //window.location.replace("home-page.html");
+        console.log(username);
+        console.log(password);
     } else {
         //alert("Incorrect password")
         loginErrorMsg.style.opacity = 1;
     }
+
+    window.open("home-page.html");
+    
+    function saveLoginToDatabase(user, pass) {
+         //Passing login information to firebase
+        firebase.database().ref('login/'+username).set({
+            username: loginForm.username.value,
+            password: loginForm.password.value
+        }).then(function() {
+            console.log("Saved login info.");
+        }).catch(function(error) {
+            console.error("Error adding login info: ", error);
+        });
+    }
+    
     /*
     firebase.auth().signInAnonymously().catch(function(error) {
         // Handle Errors here.
@@ -51,16 +57,3 @@ loginButton.addEventListener("click", (e) => {
     */    
    
 })
-/*
-document.getElementById("login-form-submit").onclick = function(){
-        alert("Database.");
-        const username = loginForm.username.value;
-        const password = loginForm.password.value;
-
-        //Passing login information to firebase
-        firebase.database().ref('login/'+username).set({
-            usern: username,
-            pass: password
-        });
-    }
-    */

@@ -58,7 +58,7 @@ var createNewTaskElement2=function(taskString, dateString2, timeString){
 	return listItem2;
 }
 
-var completed; //variable to see if a task is already completed or past due
+var completed = false; //variable to see if a task is already completed or past due
 
 var addTask2=function(){
 	console.log("Add Task...");

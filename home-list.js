@@ -57,7 +57,7 @@ var createNewTaskElement=function(taskString, dateString, timeString){
 }
 
 //time remaining
-var completed;
+var completed = false;
 
 var addTask=function(){
 	console.log("Add Task...");

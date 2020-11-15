@@ -70,7 +70,7 @@ body {
   }
   input[type="text"] {
     margin: 0;
-    font-size: 18px;
+    font-size: 12px;
     line-height: 18px;
     height: 18px;
     padding: 10px;
@@ -91,7 +91,15 @@ body {
   }
   input#new-task {
     float: left;
-    width: 318px;
+    width: 200px;
+  }
+  input#new-task1 {
+    float: left;
+    width: 200px;
+  }
+  input#new-task2 {
+    float: left;
+    width: 200px;
   }
   p > button:hover {
     color: #0FC57C;
@@ -126,6 +134,16 @@ body {
     text-decoration: line-through;
     color: white;
   }
+
+  #completed-task label {
+    text-decoration: line-through;
+    color: white;
+  }
+
+  #completed-task1 label {
+    text-decoration: line-through;
+    color: white;
+  }
   
   /* Edit Task */
   ul li input[type=text] {
@@ -138,6 +156,10 @@ body {
   
   ul li.editMode label {
     display:none;
+  }
+
+  #datepicker, #datepicker2, #datepicker3{
+    width: 85px;
   }
 
   .header {
@@ -177,4 +199,8 @@ body {
   .navbar a:hover {
     background-color: #ddd;
     color: black;
+  }
+
+  h5{
+    font-weight: 200;
   }

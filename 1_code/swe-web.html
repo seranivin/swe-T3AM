@@ -8,12 +8,12 @@
 * {
   box-sizing: border-box;
 }
-
 /* Style the body */
 body {
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
 }
+    
 /* Full-width input fields */
 input[type=text], input[type=password] {
   width: 100%;
@@ -46,6 +46,13 @@ button:hover {
   background-color: #f44336;
 }
 
+.first-txt { 
+    position: absolute; 
+    top: 50px; 
+    left: 450px;
+    background: #f5f5f5;
+}
+    
 /* Center the image and position the close button */
 .imgcontainer {
   text-align: center;
@@ -132,13 +139,12 @@ span.psw {
      width: 100%;
   }
 }
-
 /* Header/logo Title */
 .header {
-  padding: 80px;
+  padding: 5px;
   text-align: center;
-  background: #6699ff;
-  color: white;
+  background: #afd275;
+  color: black;
 }
 
 /* Increase the font size of the heading */
@@ -149,7 +155,7 @@ span.psw {
 /* Style the top navigation bar */
 .navbar {
   overflow: hidden;
-  background-color: #333;
+  background-color: #7e685a;
 }
 
 /* Style the navigation bar links */
@@ -160,6 +166,7 @@ span.psw {
   text-align: center;
   padding: 14px 20px;
   text-decoration: none;
+  font-size: 20px;
 }
 
 /* Right-aligned link */
@@ -202,8 +209,9 @@ span.psw {
 .main {   
   -ms-flex: 70%; /* IE10 */
   flex: 70%;
-  background-color: #e1eaea;
+  background-color: #f5f5f5;
   padding: 20px;
+  height: 335px;
 }
 
 /* Fake image, just for this example */
@@ -241,69 +249,68 @@ span.psw {
 </style>
 </head>
 <body>
+    <!-- <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
+    -->
+    <div id="id01" class="modal">
+      
+      <form id="login-form" class="modal-content animate" method="post">
+        <div class="imgcontainer">
+          <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+          <img src="profile.png" alt="Avatar" class="avatar">
+        </div>
+    
+        <div class="container">
+          <label for="username"><b>Username</b></label>
+          <input type="text" placeholder="Enter Username" name="username" required>
+    
+          <label for="password"><b>Password</b></label>
+          <input type="password" placeholder="Enter Password" name="password" required>
+            
+          <input type="submit" value="Login" id="login-form-submit">
+          <label>
+            <input type="checkbox" checked="checked" name="remember"> Remember me
+          </label>
+        </div>
+    
+        <div class="container" style="background-color:#f1f1f1">
+          <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+          <span class="password">Forgot <a href="#">password?</a></span>
+        </div>
+      </form>
+    </div>
 
+    <script defer src="login-page.js">
+    // Get the modal
+    var modal = document.getElementById('id01');
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    </script>
 <div class="header">
-  <h1>T3AM To-Do</h1>
-  <p>Created to help people of save and edit tasks for everyday life.</p>
+  <h1 class="first-txt" style="font-size: 65px; text-align: center;">T3AM To-Do</h1>
+    <img class="center" src="notes_pic.png" alt="Notes_pic" style="height:300px; width: 700px;">  
+  <p class="first-txt" style="font-size: 15px; margin-top: 150px;">Created to help people save and edit tasks for everyday life.</p>
 </div>
 
 <div class="navbar">
   <a href="swe-web.html">Home</a>
   <a href="about.html">About Us</a>
   <a href="#" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</a>
-<!--  <a href="#">Link</a>
-  <a href="#" class="right">Link</a> -->
-<!--Login information, user enters a username and password -->
+  <!--<a href="#">Link</a>
+  <a href="#">Link</a>
+  <a href="#" class="right">Link</a>-->
 </div>
-<div id="id01" class="modal">
-
-  <form id="login-form" class="modal-content animate" action="home-page.html" method="post">
-    <div class="imgcontainer">
-      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-      <img src="profile.png" alt="Avatar" class="avatar">
-    </div>
-
-    <div class="container">
-      <label for="username"><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="username" required>
-
-      <label for="password"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="password" required>
-        
-      <input type="submit" value="Login" id="login-form-submit">
-      <label>
-        <input type="checkbox" checked="checked" name="remember"> Remember me
-      </label>
-    </div>
-
-    <div class="container" style="background-color:#f1f1f1">
-      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-      <span class="password">Forgot <a href="#">password?</a></span>
-    </div>
-  </form>
-</div>
-
-
-<script defer src="login-page.js">
-// Get the modal
-var modal = document.getElementById('id01');
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-</script>
-    <script defer src="home-list.js"></script>
-    <script defer src="work-list.js"></script>
-    <script defer src="school-list.js"></script>
 
   <div class="main">
-    <img class="center" src="notes_pic.png" alt="Notes_pic" style="height:300px; width: 700px;">  
+      
   <!--  <div class="notes_pic.png" style="height:200px;"></div>  -->
-    <h3>Welcome to T3AM To-Do!</h3>
-    <p>We are a website that focuses on giving people a way of organizing and remembering tasks through your everyday life. We have different lists to track different portions of your life and options to create a reminder that is tailored to you. We hope you like it!</p>
+    <h1 style= "text-align: center;">Welcome to T3AM To-Do!</h1>
+      <br>
+    <p style="font-size: 20px; text-align: center;">We are a website that focuses on giving people a way of organizing and remembering tasks through your everyday life. We have different lists to track different portions of your life and options to create a reminder that is tailored to you. We hope you like it!</p>
     <br>
 <!--    <h2>TITLE HEADING</h2>
     <h5>Title description, Sep 2, 2017</h5>
@@ -315,31 +322,25 @@ window.onclick = function(event) {
 <div class="footer">
   <span><b>T3AM</b> <z class ="TMsize">TM</z></span>
 </div>
-    <head>
-    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-database.js"></script>
-</head>
-    <script id="Mainscript">
-        
-    function configFirebase(){
-      // Your web app's Firebase configuration
-    var firebaseConfig = {
-        apiKey: "AIzaSyDNc-leNBc16NmYBtwX29v3UlxR8Gu62Ls",
-        authDomain: "test-a22a9.firebaseapp.com",
-        databaseURL: "https://test-a22a9.firebaseio.com",
-        projectId: "test-a22a9",
-        storageBucket: "test-a22a9.appspot.com",
-        messagingSenderId: "373824019405",
-        appId: "1:373824019405:web:3458e3f0b8884167b04284"
-    };
-        
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    }
-    configFirebase();
+        <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-database.js"></script>
 
-    //var fireRef = firebase.database.ref();
+        <script id="Mainscript">
+          // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyDNc-leNBc16NmYBtwX29v3UlxR8Gu62Ls",
+            authDomain: "test-a22a9.firebaseapp.com",
+            databaseURL: "https://test-a22a9.firebaseio.com",
+            projectId: "test-a22a9",
+            storageBucket: "test-a22a9.appspot.com",
+            messagingSenderId: "373824019405",
+            appId: "1:373824019405:web:3458e3f0b8884167b04284"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+
     //var db = firebase.firestore();
 
 /*

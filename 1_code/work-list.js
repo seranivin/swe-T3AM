@@ -14,7 +14,7 @@ var incompleteTaskHolder2=document.getElementById("incomplete-task");//ul of #in
 var completedTasksHolder2=document.getElementById("completed-task");//completed-tasks
 
 
-var createNewTaskElement2=function(taskString){
+var createNewTaskElement2=function(taskString, dateString2, timeString){
 
     var listItem2=document.createElement("li");
     console.log("adding item");
@@ -23,6 +23,8 @@ var createNewTaskElement2=function(taskString){
 	var checkBox2=document.createElement("input");//checkbx
 	//label
 	var label2=document.createElement("label");//label
+	var dates2 = document.createElement("h5");// date label
+	var times2 = document.createElement("h6"); //time label
 	//input (text)
 	var editInput2=document.createElement("input");//text
 	//button.edit
@@ -32,6 +34,7 @@ var createNewTaskElement2=function(taskString){
 	var deleteButton2=document.createElement("button");//delete button
 
 	label2.innerText=taskString;
+	dates2.innerText = dateString2 + "\n" + timeString; //display date and time
 
 	//Each elements, needs appending
 	checkBox2.type="checkbox";
@@ -47,25 +50,47 @@ var createNewTaskElement2=function(taskString){
 	//and appending.
 	listItem2.appendChild(checkBox2);
 	listItem2.appendChild(label2);
+	listItem2.appendChild(dates2);
+	listItem2.appendChild(times2);
 	listItem2.appendChild(editInput2);
 	listItem2.appendChild(editButton2);
 	listItem2.appendChild(deleteButton2);
 	return listItem2;
 }
 
-
+var completed = false; //variable to see if a task is already completed or past due
 
 var addTask2=function(){
 	console.log("Add Task...");
+	var date2 = document.getElementById("datepicker2");
+	var time2 = document.getElementById("time2");
+	console.log(time2.value);
+	var countDownDate2 = new Date(date2.value + " " + time2.value).getTime(); //expiration date
+
 	//Create a new list item with the text from the #new-task:
-	var listItem2=createNewTaskElement2(taskInput2.value);
+	var listItem2=createNewTaskElement2(taskInput2.value, date2.value, time2.value);
 
 	//Append listItem2 to incompleteTaskHolder2
 	incompleteTaskHolder2.appendChild(listItem2);
 	bindTaskEvents2(listItem2, taskCompleted2);
-    
-    //Empty input box
-    taskInput2.value="";
+	//empty input boxes
+	date2.value = "";
+	time2.value = "";
+	taskInput2.value="";
+	var myfunc2 = setInterval(function() {
+		console.log(countDownDate2);
+		var now2 = new Date().getTime();
+		var timeleft2 = countDownDate2 - now2;   
+		// Display the message when countdown is over
+		if (timeleft2 < 0) {
+			console.log("COMPLETED");
+			var test2 = listItem2.querySelector('input[type=checkbox]');
+			completed = true; 
+			test2.checked = true;
+			completedTasksHolder2.appendChild(listItem2);
+			clearInterval(myfunc2);
+		}
+	}, 1000);
 }
 
 //Edit an existing task.
@@ -126,9 +151,14 @@ var taskIncomplete2=function(){
 //Mark task as incomplete.
 	//When the checkbox is unchecked
 		//Append the task list item to the #incomplete-tasks.
-		var listItem2=this.parentNode;
-		incompleteTaskHolder2.appendChild(listItem2);
-		bindTaskEvents2(listItem2,taskCompleted2);
+		if (completed == true){
+			alert("The deadline for that event has passed. It cannot be moved to the incomplete list");
+		}
+		else{
+			var listItem2=this.parentNode;
+			incompleteTaskHolder2.appendChild(listItem2);
+			bindTaskEvents2(listItem2,taskCompleted2);
+		}
 }
 
 

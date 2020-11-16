@@ -40,19 +40,43 @@ loginButton.addEventListener("click", (e) => {
     
 
     if (username in user_data && user_data[username] == password) {
-        //Put username in local storage
-        window.localStorage.setItem("vUserLocalStorage", JSON.stringify(loginForm.username.value)); 
-        console.log("Local storage: "+JSON.parse(window.localStorage.getItem("vUserLocalStorage")));
-        //Passing login information to firebase
         alert("You have successfully logged in.");
-
+        window.open("home-page.html");
+    }
+    else{
+    var check = false;
+    firebase.database().ref().child("login/").once("value", function(snapshot) {
+        var tasks = snapshot.val();
+        var keys = Object.keys(tasks);
+        //console.log('VALS: '+Object.valueOf(tasks));
+        for (var i=0; i<keys.length;i++) {
+            var fireUser = snapshot.child(keys[i]+"/username").val();
+            var firePass = snapshot.child(keys[i]+"/password").val();
+            if (fireUser == username && firePass == password){
+                //Put username in local storage
+                window.localStorage.setItem("vUserLocalStorage", JSON.stringify(loginForm.username.value)); 
+                console.log("Local storage: "+JSON.parse(window.localStorage.getItem("vUserLocalStorage")));
+                //Passing login information to firebase
+                alert("You have successfully logged in.");
+                window.open("home-page.html");
+                check = true;
+                break;
+            } 
+        }
+        if (!check){
+        alert("Incorrect password");  
+        }
+    });
+    }
+                                                   
+/*
     } else {
         alert("Incorrect password");
         loginErrorMsg.style.opacity = 1;
     }
 
     window.open("home-page.html");
-   
+   */
 })
 
 function saveLoginToDatabase(user) {

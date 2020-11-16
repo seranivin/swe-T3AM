@@ -15,7 +15,7 @@ var completedTasksHolder3=document.getElementById("completed-task1");//completed
 
 var home_load3 = function(){
 	//add previous firebase tasks from user
-	firebase.database().ref().child("login/"+username+'/school').on("value", function(snapshot) {
+	firebase.database().ref().child("login/"+username+'/school').once("value", function(snapshot) {
 		var tasks3 = snapshot.val();
 		var keys3 = Object.keys(tasks3);
 		//console.log('VALS: '+Object.valueOf(tasks));

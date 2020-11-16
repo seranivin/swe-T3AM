@@ -16,7 +16,7 @@ var home_load = function(){
     //console.log('LOADED: '+ loaded);
         console.log('running');
         //add previous firebase tasks from user
-        firebase.database().ref().child("login/"+username+'/home').on("value", function(snapshot) {
+        firebase.database().ref().child("login/"+username+'/home').once("value", function(snapshot) {
         var tasks = snapshot.val();
         var keys = Object.keys(tasks);
         //console.log('VALS: '+Object.valueOf(tasks));

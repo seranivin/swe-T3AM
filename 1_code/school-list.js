@@ -13,7 +13,7 @@ var addButton3=document.getElementsByTagName("button")[10];//first button
 var incompleteTaskHolder3=document.getElementById("incomplete-task1");//ul of #incomplete-tasks
 var completedTasksHolder3=document.getElementById("completed-task1");//completed-tasks
 
-var home_load3 = function(){
+window.addEventListener('load', function() {
 	//add previous firebase tasks from user
 	firebase.database().ref().child("login/"+username+'/school').once("value", function(snapshot) {
 		var tasks3 = snapshot.val();
@@ -25,13 +25,24 @@ var home_load3 = function(){
 			var oldTime3 = snapshot.child(keys3[i]+"/time").val();
 			//var oldComp = snapshot.child(keys[i]+"/completed").val();
 			var listItem3 = createOldTaskElement3(oldDes3, oldDate3, oldTime3);
-            console.log('LIST: ',listItem3);
-			//Append listItem to incompleteTaskHolder
-		   incompleteTaskHolder3.appendChild(listItem3);
-           bindTaskEvents3(listItem3, taskCompleted3);
+            var countDownDate = new Date(oldDate3 + " " + oldTime3).getTime(); //expiration date
+            var now = new Date().getTime();
+            var timeleft = countDownDate - now;
+            if (timeleft < 0) {
+                console.log('Firebase: Old task completed.');
+                completedTasksHolder3.appendChild(listItem3);
+                bindTaskEvents3(listItem3, taskCompleted3);
+                var test = listItem3.querySelector('input[type=checkbox]');
+			     test.checked = true;
+            }else{
+                //Append listItem to incompleteTaskHolder
+               incompleteTaskHolder3.appendChild(listItem3);
+               bindTaskEvents3(listItem3, taskIncomplete3);
+                console.log('Firebase: Old task incomplete.');
+            }
 		}
 		});
-}
+});
 
 
 //create previous user tasks

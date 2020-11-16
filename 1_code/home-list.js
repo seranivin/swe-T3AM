@@ -12,7 +12,8 @@ var addButton=document.getElementsByTagName("button")[0];//first button
 var incompleteTaskHolder=document.getElementById("incomplete-tasks");//ul of #incomplete-tasks
 var completedTasksHolder=document.getElementById("completed-tasks");//completed-tasks
 
-var home_load = function(){
+window.addEventListener('load', function() {
+//var home_load = function(){
     //console.log('LOADED: '+ loaded);
         console.log('running');
         //add previous firebase tasks from user
@@ -44,7 +45,7 @@ var home_load = function(){
 
         }
         });
-};
+});
 
 
 var createOldTaskElement=function(taskString, dateString, timeString){
@@ -227,13 +228,14 @@ var deleteTask=function(){
 		var ul=listItem.parentNode;
         console.log(ul);
         var firebaseId =listItem.querySelector('h6');
+        console.log('FIRE: '+ firebaseId.innerText);
 		//Remove the parent list item from the ul.
 		ul.removeChild(listItem);
         //console.log(listItem.nodeValue);
 
         //remove from firebase
         firebase.database().ref('login/'+username+'/home/'+firebaseId.innerText).remove();
-        console.log('Firebae: Task home removed');
+        console.log('Firebase: Task home removed');
 
 }
 

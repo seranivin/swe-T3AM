@@ -13,7 +13,7 @@ var addButton2=document.getElementsByTagName("button")[5];//first button
 var incompleteTaskHolder2=document.getElementById("incomplete-task");//ul of #incomplete-tasks
 var completedTasksHolder2=document.getElementById("completed-task");//completed-tasks
 
-var home_load2 = function(){
+window.addEventListener('load', function() {
 	//add previous firebase tasks from user
 	firebase.database().ref().child("login/"+username+'/work').once("value", function(snapshot) {
 		var tasks2 = snapshot.val();
@@ -25,12 +25,24 @@ var home_load2 = function(){
 			var oldTime2 = snapshot.child(keys2[i]+"/time").val();
 			//var oldComp = snapshot.child(keys[i]+"/completed").val();
 			var listItem2 = createOldTaskElement2(oldDes2, oldDate2, oldTime2);
-			//Append listItem to incompleteTaskHolder
-		   incompleteTaskHolder2.appendChild(listItem2);
-            bindTaskEvents2(listItem2, taskCompleted2);
+			var countDownDate = new Date(oldDate2 + " " + oldTime2).getTime(); //expiration date
+            var now = new Date().getTime();
+            var timeleft = countDownDate - now;
+            if (timeleft < 0) {
+                console.log('Firebase: Old task completed.');
+                completedTasksHolder2.appendChild(listItem2);
+                bindTaskEvents2(listItem2, taskCompleted2);
+                var test = listItem2.querySelector('input[type=checkbox]');
+			     test.checked = true;
+            }else{
+                //Append listItem to incompleteTaskHolder
+               incompleteTaskHolder2.appendChild(listItem2);
+               bindTaskEvents2(listItem2, taskIncomplete2);
+                console.log('Firebase: Old task incomplete.');
+            }
 		}
 		});
-}
+});
 
 
 //create previous user tasks
@@ -60,9 +72,9 @@ var createOldTaskElement2=function(taskString, dateString, timeString){
 	editInput2.type="text";
 
 	editButton2.innerText="Edit";//innerText encodes special characters, HTML does not.
-	editButton2.className="edit2";
+	editButton2.className="edit1";
 	deleteButton2.innerText="Delete";
-	deleteButton2.className="delete2";
+	deleteButton2.className="delete1";
 
 	//and appending.
 	listItem2.appendChild(checkBox2);

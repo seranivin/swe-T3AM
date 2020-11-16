@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="home-page.css">
+<div w3-include-html="swe-web.html"></div> 
 <script src="login-page.js"></script> 
+<!-- Load the home page -->
+<link rel="stylesheet" href="home-page.css">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>T3AM To-Do</title>
+
+<script type="text/javascript" src="home-list.js"></script>
+<script type="text/javascript" src="work-list.js"></script>
+<script type="text/javascript" src="school-list.js"></script>
+    
 <link rel="stylesheet" href="calendar.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -19,6 +26,7 @@
   </script>
 </head>
 <body>
+    <div id="includedContent"></div>
     <div class="header">
         <h1>T3AM To-Do</h1>
         <p>Created to help people of save and edit tasks for everyday life.</p>
@@ -28,6 +36,7 @@
         <a href="swe-web.html">Home</a>
         <a href="about.html">About Us</a>
         <a href="#" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</a>
+        <a onclick="home_load();home_load2();home_load3();">Load Previous Tasks</a>
       <!--  <a href="#">Link</a>
         <a href="#" class="right">Link</a> -->
       </div>
@@ -40,6 +49,7 @@
             <p style="color:white;">
                 <label style="color:white;" for="new-task">Add Item</label><input style="color: black;" id="new-task" type="text"><button>Add</button> Date: <input type="text" id="datepicker"> Time: <input type="time" id="time">
             </p>
+            <h3 style="color:white;" >Todo Tasks</h3>   
             <ul id="incomplete-tasks" style="color:white;">
               <li ><input type="checkbox"><label>Pay Bills</label><h5> </h5><h6></h6><input style="color: black;" type="text"><button class="edit">Edit</button><button class="delete">Delete</button></li>              
             </ul>
@@ -57,6 +67,7 @@
             <p>
                 <label style="color:white;" for="new-task">Add Item</label><input style="color: black;" id="new-task1" type="text"><button>Add</button> Date: <input type="text" id="datepicker2">Time: <input type="time" id="time2">
             </p>
+            <h3 style="color:white;" >Todo Tasks</h3>
             <ul id="incomplete-task">
               <li><input type="checkbox"><label>Finish Project</label><h5> </h5><input style="color: black;" type="text"><button class="edit1">Edit</button><button class="delete1">Delete</button></li>              
             </ul>
@@ -74,6 +85,7 @@
             <p style="color:white;">
                 <label style="color:white;" for="new-task">Add Item</label><input style="color: black;" id="new-task2" type="text"><button>Add</button> Date: <input type="text" id="datepicker3"> Time: <input type="time" id="time3">
             </p>
+            <h3 style="color:white;" >Todo Tasks</h3>
             <ul style="color:white;" id="incomplete-task1">
               <li><input type="checkbox"><label>Do math homework</label><h5> </h5><input style="color: black;" type="text"><button class="edit2">Edit</button><button class="delete2">Delete</button></li>              
             </ul>
@@ -90,25 +102,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-database.js"></script>
+    <script src="database.js"></script>
     </head>
-    <script id="Mainscript">
-        
-    function configFirebase(){
-      // Your web app's Firebase configuration
-    var firebaseConfig = {
-        apiKey: "AIzaSyDNc-leNBc16NmYBtwX29v3UlxR8Gu62Ls",
-        authDomain: "test-a22a9.firebaseapp.com",
-        databaseURL: "https://test-a22a9.firebaseio.com",
-        projectId: "test-a22a9",
-        storageBucket: "test-a22a9.appspot.com",
-        messagingSenderId: "373824019405",
-        appId: "1:373824019405:web:3458e3f0b8884167b04284"
-    };
-        
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    }
-    configFirebase();
-    </script>
 </body>
 </html>

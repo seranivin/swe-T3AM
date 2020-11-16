@@ -7,12 +7,74 @@
 
 
 //Event handling, uder interaction is what starts the code execution.
-
+var username = JSON.parse(window.localStorage.getItem("vUserLocalStorage"));  
 var taskInput3=document.getElementById("new-task2");//Add a new task.
 var addButton3=document.getElementsByTagName("button")[10];//first button
 var incompleteTaskHolder3=document.getElementById("incomplete-task1");//ul of #incomplete-tasks
 var completedTasksHolder3=document.getElementById("completed-task1");//completed-tasks
 
+var home_load3 = function(){
+	//add previous firebase tasks from user
+	firebase.database().ref().child("login/"+username+'/school').on("value", function(snapshot) {
+		var tasks3 = snapshot.val();
+		var keys3 = Object.keys(tasks3);
+		//console.log('VALS: '+Object.valueOf(tasks));
+		for (var i=0; i<keys3.length;i++) {
+			var oldDate3 = snapshot.child(keys3[i]+"/date").val();
+			var oldDes3 = snapshot.child(keys3[i]+"/description").val();
+			var oldTime3 = snapshot.child(keys3[i]+"/time").val();
+			//var oldComp = snapshot.child(keys[i]+"/completed").val();
+			var listItem3 = createOldTaskElement3(oldDes3, oldDate3, oldTime3);
+            console.log('LIST: ',listItem3);
+			//Append listItem to incompleteTaskHolder
+		   incompleteTaskHolder3.appendChild(listItem3);
+           bindTaskEvents3(listItem3, taskCompleted3);
+		}
+		});
+}
+
+
+//create previous user tasks
+var createOldTaskElement3=function(taskString, dateString, timeString){
+
+    var listItem3=document.createElement("li");
+    console.log("adding item");
+
+	//input (checkbox)
+	var checkBox3=document.createElement("input");//checkbx
+	//label
+	var label3=document.createElement("label");//label
+	var dates3 = document.createElement("h5");// date label
+	var randNum3 = document.createElement("h6");// time label
+	//input (text)
+	var editInput3=document.createElement("input");//text
+	//button.edit
+	var editButton3=document.createElement("button");//edit button
+
+	//button.delete
+	var deleteButton3=document.createElement("button");//delete button
+	//label texts
+	label3.innerText=taskString;
+	dates3.innerText = dateString + "\n" + timeString;
+	//Each elements, needs appending
+	checkBox3.type="checkbox";
+	editInput3.type="text";
+
+	editButton3.innerText="Edit";//innerText encodes special characters, HTML does not.
+	editButton3.className="edit2";
+	deleteButton3.innerText="Delete";
+	deleteButton3.className="delete2";
+
+	//and appending.
+	listItem3.appendChild(checkBox3);
+	listItem3.appendChild(label3);
+	listItem3.appendChild(dates3);
+	listItem3.appendChild(editInput3);
+	listItem3.appendChild(editButton3);
+	listItem3.appendChild(deleteButton3);
+    listItem3.appendChild(randNum3);
+	return listItem3;
+}
 
 var createNewTaskElement3=function(taskString, dateString3, timeString){
 
@@ -24,7 +86,7 @@ var createNewTaskElement3=function(taskString, dateString3, timeString){
 	//label
 	var label3=document.createElement("label");//label
     var dates3 = document.createElement("h5");// date label
-    var times3 = document.createElement("h6"); //time label
+    var randNum3 = document.createElement("h6");// random id label
 	//input (text)
 	var editInput3=document.createElement("input");//text
 	//button.edit
@@ -41,20 +103,20 @@ var createNewTaskElement3=function(taskString, dateString3, timeString){
 	editInput3.type="text";
 
 	editButton3.innerText="Edit";//innerText encodes special characters, HTML does not.
-	editButton3.className="edit1";
+	editButton3.className="edit2";
 	deleteButton3.innerText="Delete";
-	deleteButton3.className="delete1";
-
+	deleteButton3.className="delete2";
+	randNum3.innerText = Math.floor(Math.random() * 100001);
 
 
 	//and appending.
 	listItem3.appendChild(checkBox3);
 	listItem3.appendChild(label3);
     listItem3.appendChild(dates3);
-    listItem3.appendChild(times3);
 	listItem3.appendChild(editInput3);
 	listItem3.appendChild(editButton3);
 	listItem3.appendChild(deleteButton3);
+	listItem3.appendChild(randNum3);
 	return listItem3;
 }
 
@@ -69,16 +131,31 @@ var addTask3=function(){
 
 	//Create a new list item with the text from the #new-task:
 	var listItem3=createNewTaskElement3(taskInput3.value, date3.value, time3.value);
-
+	//firebase id rand num
+	var firebaseId3 =listItem3.querySelector('h6');	
+	console.log('Firebase Work Id: '+firebaseId3.innerText);
 	//Append listItem3 to incompleteTaskHolder3
 	incompleteTaskHolder3.appendChild(listItem3);
 	bindTaskEvents3(listItem3, taskCompleted3);
+
+	//add information to firebase
+	firebase.database().ref('login/'+username+'/school/'+firebaseId3.innerText).set({
+        description: taskInput3.value,
+        date: date3.value,
+        time: time3.value,
+        completed: completed
+    }).then(function() {
+        console.log("Firebase: Saved school task info.");
+    }).catch(function(error) {
+        console.error("Firebase: Error adding school task info: ", error);
+    });
+
 	//empty input boxes
 	date3.value = "";
 	time3.value = "";
 	taskInput3.value="";
 	var myfunc3 = setInterval(function() {
-		console.log(countDownDate3);
+		//console.log(countDownDate3);
 		var now3 = new Date().getTime();
 		var timeleft3 = countDownDate3 - now3;   
 		// Display the message when countdown is over
@@ -105,6 +182,9 @@ var listItem3=this.parentNode;
 var editInput=listItem3.querySelector('input[type=text]');
 var label=listItem3.querySelector("label");
 var containsClass=listItem3.classList.contains("editMode");
+//firebase rand id
+var firebaseId3 =listItem3.querySelector('h6');
+console.log('FIRE: '+firebaseId3.innerText)
 		//If class of the parent is .editmode
 		if(containsClass){
 
@@ -117,6 +197,10 @@ var containsClass=listItem3.classList.contains("editMode");
 
 		//toggle .editmode on the parent.
 		listItem3.classList.toggle("editMode");
+
+	//update firebase
+	firebase.database().ref('login/'+username+'/school/'+firebaseId3.innerText).update({ description: editInput.value });
+	console.log("Firebase: Edited school task info.");
 }
 
 
@@ -128,9 +212,13 @@ var deleteTask3=function(){
 
 		var listItem3=this.parentNode;
 		var ul3=listItem3.parentNode;
+		var firebaseId3 =listItem3.querySelector('h6');
 		//Remove the parent list item from the ul.
 		ul3.removeChild(listItem3);
-
+		
+		//remove from firebase
+		firebase.database().ref('login/'+username+'/school/'+firebaseId3.innerText).remove();
+		console.log('Firebase: Task school removed');
 }
 
 
@@ -140,8 +228,17 @@ var taskCompleted3=function(){
 	
 		//Append the task list item to the #completed-tasks
 		var listItem3=this.parentNode;
+		var firebaseId3 =listItem3.querySelector('h6');
 		completedTasksHolder3.appendChild(listItem3);
 		bindTaskEvents3(listItem3, taskIncomplete3);
+
+		//update firebase to completed
+		firebase.database().ref('login/'+username+'/school/'+firebaseId3.innerText).update({completed: 'true'}
+		).then(function() {
+			console.log("Firebase: Task school completed.");
+		}).catch(function(error) {
+			console.error("Firebase: Error completing school task: ", error);
+		});
 
 }
 
@@ -156,8 +253,17 @@ var taskIncomplete3=function(){
 		}
 		else{
 			var listItem3=this.parentNode;
+			var firebaseId3 =listItem3.querySelector('h6');
 			incompleteTaskHolder3.appendChild(listItem3);
 			bindTaskEvents3(listItem3,taskCompleted3);
+
+			//update firebase to incomplete
+			firebase.database().ref('login/'+username+'/school/'+firebaseId3.innerText).update({completed: 'false'}
+			).then(function() {
+				console.log("Firebase: Task school incomplete.");
+			}).catch(function(error) {
+				console.error("Firebase: Error incompleting school task: ", error);
+			});
 		}
 }
 
@@ -179,8 +285,8 @@ var bindTaskEvents3=function(tasklistItem3,checkBoxEventHandler3){
 	console.log("bind list item events");
 //select listItem3s children
 	var checkBox3=tasklistItem3.querySelector("input[type=checkbox]");
-	var editButton3=tasklistItem3.querySelector("button.edit1");
-	var deleteButton3=tasklistItem3.querySelector("button.delete1");
+	var editButton3=tasklistItem3.querySelector("button.edit2");
+	var deleteButton3=tasklistItem3.querySelector("button.delete2");
 
 
 			//Bind editTask to edit button.

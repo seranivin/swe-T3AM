@@ -7,14 +7,34 @@
 
 
 //Event handling, uder interaction is what starts the code execution.
-
+var username = JSON.parse(window.localStorage.getItem("vUserLocalStorage"));  
 var taskInput2=document.getElementById("new-task1");//Add a new task.
 var addButton2=document.getElementsByTagName("button")[5];//first button
 var incompleteTaskHolder2=document.getElementById("incomplete-task");//ul of #incomplete-tasks
 var completedTasksHolder2=document.getElementById("completed-task");//completed-tasks
 
+var home_load2 = function(){
+	//add previous firebase tasks from user
+	firebase.database().ref().child("login/"+username+'/work').on("value", function(snapshot) {
+		var tasks2 = snapshot.val();
+		var keys2 = Object.keys(tasks2);
+		//console.log('VALS: '+Object.valueOf(tasks));
+		for (var i=0; i<keys2.length;i++) {
+			var oldDate2 = snapshot.child(keys2[i]+"/date").val();
+			var oldDes2 = snapshot.child(keys2[i]+"/description").val();
+			var oldTime2 = snapshot.child(keys2[i]+"/time").val();
+			//var oldComp = snapshot.child(keys[i]+"/completed").val();
+			var listItem2 = createOldTaskElement2(oldDes2, oldDate2, oldTime2);
+			//Append listItem to incompleteTaskHolder
+		   incompleteTaskHolder2.appendChild(listItem2);
+            bindTaskEvents2(listItem2, taskCompleted2);
+		}
+		});
+}
 
-var createNewTaskElement2=function(taskString, dateString2, timeString){
+
+//create previous user tasks
+var createOldTaskElement2=function(taskString, dateString, timeString){
 
     var listItem2=document.createElement("li");
     console.log("adding item");
@@ -24,7 +44,48 @@ var createNewTaskElement2=function(taskString, dateString2, timeString){
 	//label
 	var label2=document.createElement("label");//label
 	var dates2 = document.createElement("h5");// date label
-	var times2 = document.createElement("h6"); //time label
+	var randNum2 = document.createElement("h6");// time label
+	//input (text)
+	var editInput2=document.createElement("input");//text
+	//button.edit
+	var editButton2=document.createElement("button");//edit button
+
+	//button.delete
+	var deleteButton2=document.createElement("button");//delete button
+	//label texts
+	label2.innerText=taskString;
+	dates2.innerText = dateString + "\n" + timeString;
+	//Each elements, needs appending
+	checkBox2.type="checkbox";
+	editInput2.type="text";
+
+	editButton2.innerText="Edit";//innerText encodes special characters, HTML does not.
+	editButton2.className="edit2";
+	deleteButton2.innerText="Delete";
+	deleteButton2.className="delete2";
+
+	//and appending.
+	listItem2.appendChild(checkBox2);
+	listItem2.appendChild(label2);
+	listItem2.appendChild(dates2);
+	listItem2.appendChild(editInput2);
+	listItem2.appendChild(editButton2);
+	listItem2.appendChild(deleteButton2);
+    listItem2.appendChild(randNum2);
+	return listItem2;
+}
+var createNewTaskElement2=function(taskString, dateString2, timeString){
+
+
+    var listItem2=document.createElement("li");
+    console.log("adding item");
+
+	//input (checkbox)
+	var checkBox2=document.createElement("input");//checkbx
+	//label
+	var label2=document.createElement("label");//label
+	var dates2 = document.createElement("h5");// date label
+	var randNum2 = document.createElement("h6");// random id label
 	//input (text)
 	var editInput2=document.createElement("input");//text
 	//button.edit
@@ -44,6 +105,7 @@ var createNewTaskElement2=function(taskString, dateString2, timeString){
 	editButton2.className="edit1";
 	deleteButton2.innerText="Delete";
 	deleteButton2.className="delete1";
+	randNum2.innerText = Math.floor(Math.random() * 100001);
 
 
 
@@ -51,10 +113,10 @@ var createNewTaskElement2=function(taskString, dateString2, timeString){
 	listItem2.appendChild(checkBox2);
 	listItem2.appendChild(label2);
 	listItem2.appendChild(dates2);
-	listItem2.appendChild(times2);
 	listItem2.appendChild(editInput2);
 	listItem2.appendChild(editButton2);
 	listItem2.appendChild(deleteButton2);
+	listItem2.appendChild(randNum2);
 	return listItem2;
 }
 
@@ -69,16 +131,32 @@ var addTask2=function(){
 
 	//Create a new list item with the text from the #new-task:
 	var listItem2=createNewTaskElement2(taskInput2.value, date2.value, time2.value);
-
+	//firebase id rand num
+	var firebaseId2 =listItem2.querySelector('h6');	
+    console.log('Firebase Work Id: '+firebaseId2.innerText);
+	
 	//Append listItem2 to incompleteTaskHolder2
 	incompleteTaskHolder2.appendChild(listItem2);
 	bindTaskEvents2(listItem2, taskCompleted2);
+	
+	 //add information to firebase
+	 firebase.database().ref('login/'+username+'/work/'+firebaseId2.innerText).set({
+        description: taskInput2.value,
+        date: date2.value,
+        time: time2.value,
+        completed: completed
+    }).then(function() {
+        console.log("Firebase: Saved work task info.");
+    }).catch(function(error) {
+        console.error("Firebase: Error adding work task info: ", error);
+    });
+	
 	//empty input boxes
 	date2.value = "";
 	time2.value = "";
 	taskInput2.value="";
 	var myfunc2 = setInterval(function() {
-		console.log(countDownDate2);
+		//console.log(countDownDate2);
 		var now2 = new Date().getTime();
 		var timeleft2 = countDownDate2 - now2;   
 		// Display the message when countdown is over
@@ -105,6 +183,9 @@ var listItem2=this.parentNode;
 var editInput=listItem2.querySelector('input[type=text]');
 var label=listItem2.querySelector("label");
 var containsClass=listItem2.classList.contains("editMode");
+//firebase rand id
+var firebaseId2 =listItem2.querySelector('h6');
+console.log('FIRE: '+firebaseId2.innerText)
 		//If class of the parent is .editmode
 		if(containsClass){
 
@@ -117,6 +198,10 @@ var containsClass=listItem2.classList.contains("editMode");
 
 		//toggle .editmode on the parent.
 		listItem2.classList.toggle("editMode");
+	
+	//update firebase
+	firebase.database().ref('login/'+username+'/work/'+firebaseId2.innerText).update({ description: editInput.value });
+	console.log("Firebase: Edited work task info.");
 }
 
 
@@ -128,8 +213,13 @@ var deleteTask2=function(){
 
 		var listItem2=this.parentNode;
 		var ul2=listItem2.parentNode;
+		var firebaseId2 =listItem2.querySelector('h6');
 		//Remove the parent list item from the ul.
 		ul2.removeChild(listItem2);
+
+		//remove from firebase
+		firebase.database().ref('login/'+username+'/work/'+firebaseId2.innerText).remove();
+		console.log('Firebase: Task work removed');
 
 }
 
@@ -140,8 +230,18 @@ var taskCompleted2=function(){
 	
 		//Append the task list item to the #completed-tasks
 		var listItem2=this.parentNode;
+		var firebaseId2 =listItem2.querySelector('h6');
 		completedTasksHolder2.appendChild(listItem2);
 		bindTaskEvents2(listItem2, taskIncomplete2);
+
+		//update firebase to completed
+		firebase.database().ref('login/'+username+'/work/'+firebaseId2.innerText).update({completed: 'true'}
+		).then(function() {
+			console.log("Firebase: Task work completed.");
+		}).catch(function(error) {
+			console.error("Firebase: Error completing work task: ", error);
+		});
+		
 
 }
 
@@ -156,8 +256,17 @@ var taskIncomplete2=function(){
 		}
 		else{
 			var listItem2=this.parentNode;
+			var firebaseId2 =listItem2.querySelector('h6');
 			incompleteTaskHolder2.appendChild(listItem2);
 			bindTaskEvents2(listItem2,taskCompleted2);
+
+			//update firebase to incomplete
+            firebase.database().ref('login/'+username+'/work/'+firebaseId2.innerText).update({completed: 'false'}
+            ).then(function() {
+                console.log("Firebase: Task work incomplete.");
+            }).catch(function(error) {
+                console.error("Firebase: Error incompleting work task: ", error);
+            });
 		}
 }
 
